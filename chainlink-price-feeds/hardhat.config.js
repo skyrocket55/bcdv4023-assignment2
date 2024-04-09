@@ -1,24 +1,18 @@
-require("@nomicfoundation/hardhat-toolbox");
-// require('@nomiclabs/hardhat-ethers');
-require('dotenv').config();
+// hardhat.config.js
 
-require("@nomicfoundation/hardhat-ethers");
-require("hardhat-deploy");
-require("hardhat-deploy-ethers");
-
-const {
-  ALCHEMY_API_KEY,
-  METAMASK_PRIVATE_KEY
-} = process.env;
-
-
-/** @type import('hardhat/config').HardhatUserConfig */
+require("dotenv").config();
+require("@nomiclabs/hardhat-ethers");
+ 
 module.exports = {
-  solidity: "0.8.24",
+  solidity: "0.8.20",
+  paths: {
+    artifacts: './src/artifacts',
+  },
   networks: {
-    sepolia: {
-      url: `https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
-      accounts: [METAMASK_PRIVATE_KEY],
+    fuji: {
+      url: process.env.QUICKNODE_URL,
+      accounts: [`0x` + process.env.PRIVATE_KEY],
+      chainId: 43113,
     },
   },
-};
+}
